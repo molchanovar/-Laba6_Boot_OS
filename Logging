@@ -110,7 +110,11 @@ Last login: Tue Dec  8 17:59:39 2020 from 10.0.2.2
 [root@lvm vagrant]# lvs
   LV       VG       Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
   LogVol00 OtusRoot -wi-ao---- <37.47g                                                    
-  LogVol01 OtusRoot -wi-ao----   1.50g                                                    
+  LogVol01 OtusRoot -wi-ao----   1.50g
+  
+
+	2) Добавления модуля в initrd
+	
 [root@lvm vagrant]# cd /usr/lib/dracut/modules.d/
 [root@lvm modules.d]# ls
 00bash               04watchdog     30convertfs  80cms     90dm                  90kernel-modules  90multipath-hostonly  95dasd       95resume        95virtfs       98pollcdrom  98usrmount  99shutdown
@@ -135,9 +139,6 @@ module-setup.sh  test.sh
 [root@lvm ~]# dracut -f -v
 Executing: /sbin/dracut -f -v
 
-
-	2) Добавления модуля в initrd
-	
 [root@lvm ~]# lsinitrd -f -v /boot/initramfs-$(uname -r).img | grep test
 Binary file (standard input) matches
 [root@lvm ~]# reboot
