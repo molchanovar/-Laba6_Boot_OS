@@ -1,5 +1,5 @@
 # Laba6_Boot_OS
-Configuring grub2
+<h3>Configuring grub2</h3>
 
 1. Выполнен вход в систему Linux CentOS без пароля 3 методами: 
 
