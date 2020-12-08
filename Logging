@@ -250,4 +250,3 @@ Skipping udev rule: 91-permissions.rules
 [root@lvm 01test]# shutdown -r now
 Connection to 127.0.0.1 closed by remote host.
 Connection to 127.0.0.1 closed.
-
