@@ -18,8 +18,19 @@
 # init=/bin/sh
 linux16 /vmlinuz-3.10.0-862.2.3.el7.x86_64 root=/dev/mapper/VolGroup00-LogVol00 ro crashkernel=auto rd.lvm.lv=VolGroup00/LogVol00 rd.lvm.lv=VolGroup00/LogVol01 rhgb init=/bin/sh
 
+# Перемонтирование в режим Read-Write
+[sh-4.2]# mount -o remount,rw /
+[sh-4.2]# passwd root
+[sh-4.2]# touch /.autorelabel
+
+
 # rd.break
 linux16 /vmlinuz-3.10.0-862.2.3.el7.x86_64 root=/dev/mapper/VolGroup00-LogVol00 ro crashkernel=auto rd.lvm.lv=VolGroup00/LogVol00 rd.lvm.lv=VolGroup00/LogVol01 rhgb rd.break
 
+
+
 # init=/sysroot/bin/sh
 linux16 /vmlinuz-3.10.0-862.2.3.el7.x86_64 root=/dev/mapper/VolGroup00-LogVol00 ro crashkernel=auto rd.lvm.lv=VolGroup00/LogVol00 rd.lvm.lv=VolGroup00/LogVol01 rhgb init=/sysroot/bin/sh
+
+
+
