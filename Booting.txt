@@ -19,18 +19,33 @@
 linux16 /vmlinuz-3.10.0-862.2.3.el7.x86_64 root=/dev/mapper/VolGroup00-LogVol00 ro crashkernel=auto rd.lvm.lv=VolGroup00/LogVol00 rd.lvm.lv=VolGroup00/LogVol01 rhgb init=/bin/sh
 
 # Перемонтирование в режим Read-Write
-[sh-4.2]# mount -o remount,rw /
+[sh-4.2]# mount -o remount,rw /   // монтирование в запись (rw)
 [sh-4.2]# passwd root
 [sh-4.2]# touch /.autorelabel
+[sh-4.2]# reboot                  // после перезагрузки новый пароль root
 
 
 # rd.break
 linux16 /vmlinuz-3.10.0-862.2.3.el7.x86_64 root=/dev/mapper/VolGroup00-LogVol00 ro crashkernel=auto rd.lvm.lv=VolGroup00/LogVol00 rd.lvm.lv=VolGroup00/LogVol01 rhgb rd.break
+
+[switch_root]# mount -o remount,rw /sysroot // монтирование в запись (rw)
+[switch_root]# mount | grep sysroot
+/dev/mapper/OtusRoot-LogVol00 on /sysroot type xfs (rw)
+[switch_root]# chroot /sysroot
+[sh-4.2]# passwd root         // меняю пароль
+[sh-4.2]# touch /.autorelabel // обход selinux
+[sh-4.2]# exit
+[switch_root]# mount -o remount,ro /sysroot // монтирование в чтение
+[switch_root]# reboot
 
 
 
 # init=/sysroot/bin/sh
 linux16 /vmlinuz-3.10.0-862.2.3.el7.x86_64 root=/dev/mapper/VolGroup00-LogVol00 ro crashkernel=auto rd.lvm.lv=VolGroup00/LogVol00 rd.lvm.lv=VolGroup00/LogVol01 rhgb init=/sysroot/bin/sh
 
-
-
+[:/]# mount | grep sysroot
+/dev/mapper/OtusRoot-LogVol00 on /sysroot type xfs (rw) // сразу в rw
+[:/]# chroot /sysroot
+[:/]# passwd root
+[:/]# touch /.autorelabel  
+[:/]# reboot
